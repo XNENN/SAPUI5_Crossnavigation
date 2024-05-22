@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CrossNavigation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Cup" EntityType="CrossNavigation.Cup">
+                    <NavigationPropertyBinding Path="has_Liquid" Target="Liquid"/>
+                </EntitySet>
+                <EntitySet Name="Liquid" EntityType="CrossNavigation.Liquid">
+                    <NavigationPropertyBinding Path="in_Cup" Target="Cup"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="Cup">
+                <Property Name="ID" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="has_Liquid" Type="Collection(CrossNavigation.Liquid)" Partner="in_Cup">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Liquid">
+                <Property Name="ID" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="in_Cup" Type="CrossNavigation.Cup" Partner="has_Liquid"/>
+            </EntityType>
+            <Annotations Target="CrossNavigation.Cup/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CrossNavigation.Liquid/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

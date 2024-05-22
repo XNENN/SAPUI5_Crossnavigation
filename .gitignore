@@ -1,0 +1,31 @@
+_out
+*.db
+connection.properties
+default-*.json
+.cdsrc-private.json
+gen/
+node_modules/
+target/
+
+_# Web IDE, App Studio_
+.che/
+.gen/
+
+_# MTA_
+*_mta_build_tmp
+*.mtargitignore
+mta_archives/
+
+_# Other_
+.DS_Store
+*.orig
+*.log
+
+*.iml
+*.flattened-pom.xml
+
+_# IDEs_
+.vscode/
+_# .idea_
+_# env_
+*.env 
