@@ -11,13 +11,16 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "@sap/ux-specification": "^1.120.10"
+    "@sap/ux-specification": "^1.120.11"
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-fiorielements": "cds watch --open fiorielements/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-fiorielements": "cds watch --open fiorielements/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-ui5freestyle": "cds watch --open ui5freestyle/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
-    "app/fiorielements"
+    "app/fiorielements",
+    "app/ui5freestyle",
+    "app/ui5freestyle"
   ]
 }

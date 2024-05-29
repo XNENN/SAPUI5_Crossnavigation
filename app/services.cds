@@ -1,2 +1,6 @@
 
 using from './fiorielements/annotations';
+
+using from './ui5freestyle/annotations';
+
+using from './ui5freestyle/annotations';

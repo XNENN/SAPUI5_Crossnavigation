@@ -1,7 +1,7 @@
 {
   "_version": "1.40.0",
   "sap.app": {
-    "id": "fiorielements",
+    "id": "ui5freestyle",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -11,14 +11,14 @@
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {
-      "id": "@sap/generator-fiori:lrop",
+      "id": "@sap/generator-fiori:worklist",
       "version": "1.7.3",
-      "toolsId": "130db1ed-4260-4f46-891d-589300aa04f2"
+      "toolsId": "acdd6a29-e5a1-4d45-8fda-426953b37e30"
     },
     "crossNavigation": {
       "inbounds": {
-        "fiorielements-display": {
-          "semanticObject": "fiorielements",
+        "ui5freestyle-display": {
+          "semanticObject": "ui5freestyle",
           "action": "display",
           "title": "{{flpTitle}}",
           "signature": {
@@ -33,18 +33,9 @@
         "uri": "/Ui5/",
         "type": "OData",
         "settings": {
-          "annotations": [
-            "annotation"
-          ],
+          "annotations": [],
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
-        }
-      },
-      "annotation": {
-        "type": "ODataAnnotation",
-        "uri": "annotations/annotation.xml",
-        "settings": {
-          "localUri": "annotations/annotation.xml"
         }
       }
     }
@@ -72,8 +63,12 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.ushell": {},
-        "sap.fe.templates": {}
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
       }
     },
     "contentDensities": {
@@ -84,7 +79,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "fiorielements.i18n.i18n"
+          "bundleName": "ui5freestyle.i18n.i18n"
         }
       },
       "": {
@@ -96,65 +91,69 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
-      },
-      "@i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
       }
     },
     "resources": {
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "ui5freestyle.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": [
+            "notFound"
+          ]
+        },
+        "async": true
+      },
       "routes": [
         {
-          "pattern": ":?query:",
-          "name": "CupList",
-          "target": "CupList"
+          "pattern": "",
+          "name": "worklist",
+          "target": [
+            "worklist"
+          ]
         },
         {
-          "pattern": "Cup({key}):?query:",
-          "name": "CupObjectPage",
-          "target": "CupObjectPage"
+          "pattern": "Liquid/{objectId}",
+          "name": "object",
+          "target": [
+            "object"
+          ]
         }
       ],
       "targets": {
-        "CupList": {
-          "type": "Component",
-          "id": "CupList",
-          "name": "sap.fe.templates.ListReport",
-          "options": {
-            "settings": {
-              "entitySet": "Cup",
-              "variantManagement": "Page",
-              "navigation": {
-                "Cup": {
-                  "detail": {
-                    "route": "CupObjectPage"
-                  }
-                }
-              },
-              "initialLoad": "Enabled"
-            }
-          }
+        "worklist": {
+          "viewName": "Worklist",
+          "viewId": "worklist",
+          "viewLevel": 1,
+          "title": "{i18n>worklistViewTitle}"
         },
-        "CupObjectPage": {
-          "type": "Component",
-          "id": "CupObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "entitySet": "Cup"
-            }
-          }
+        "object": {
+          "viewName": "Object",
+          "viewId": "object",
+          "viewLevel": 2,
+          "title": "{i18n>objectViewTitle}"
+        },
+        "objectNotFound": {
+          "viewName": "ObjectNotFound",
+          "viewId": "objectNotFound"
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
         }
       }
+    },
+    "rootView": {
+      "viewName": "ui5freestyle.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
     }
-  },
-  "sap.fiori": {
-    "registrationIds": [],
-    "archeType": "transactional"
   }
 }
