@@ -25,7 +25,45 @@
         <semantic:sendEmailAction>
             <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
         </semantic:sendEmailAction>
+        <Table
+        id="tableCup"
+        width="auto"
+        items="{
+            path: 'in_Cup',
+            sorter: {
+                path: 'ID',
+                descending: false
+            }
+        }"
+        mode="SingleSelectLeft"
+        noDataText="{worklistView>/tableNoDataText}"
+        busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+        growing="true"
+        growingScrollToLoad="true"
+        updateFinished=".onUpdateFinished">
+        <columns>
+            <Column id="nameColumn">
+                <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+            </Column>
+            <Column id="unitNumberColumn" hAlign="End">
+                <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+            </Column>
+        </columns>
 
+        <items>
+            <ColumnListItem
+            type="Navigation"
+                        press=".onNav">
+                <cells>
+                    <ObjectIdentifier
+                        title="{ID}"/>
+                    <ObjectNumber
+                        unit="{to_Cup_ID}"
+                     />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
     </semantic:SemanticPage>
 
 </mvc:View>

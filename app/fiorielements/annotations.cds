@@ -65,13 +65,22 @@ annotate service.LiquidInCup with @(
 annotate service.LiquidInCup with {
     to_Liquid @Common.SemanticObject : 'ui5freestyle'
 };
-
+annotate service.Cup with @(
+    UI.HeaderInfo : {
+        Title : {
+            $Type : 'UI.DataField',
+            Value : Name,
+        },
+        TypeName : '',
+        TypeNamePlural : '',
+    }
+);
 annotate service.LiquidInCup with {
     to_Liquid @Common.SemanticObjectMapping : [
         {
             $Type : 'Common.SemanticObjectMappingType',
             LocalProperty : to_Liquid_ID,
-            SemanticObjectProperty : 'ID',
+            SemanticObjectProperty : 'has_Liquid_ID',
         },
     ]
 };
