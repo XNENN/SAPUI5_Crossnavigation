@@ -7,7 +7,6 @@ sap.ui.define(
   ],
   function (BaseController, JSONModel, History, formatter) {
     "use strict";
-
     return BaseController.extend("ui5freestyle.controller.Object", {
       formatter: formatter,
 
@@ -41,13 +40,8 @@ sap.ui.define(
        * @public
        */
       onNavBack: function () {
-        var sPreviousHash = History.getInstance().getPreviousHash();
-        if (sPreviousHash !== undefined) {
-          // eslint-disable-next-line sap-no-history-manipulation
-          history.go(-1);
-        } else {
-          this.getRouter().navTo("worklist", {}, true);
-        }
+        
+        this.getRouter().navTo("worklist", {}, true);
       },
       onNav: function (oEvent) {
         var to_cup_ID = this.byId("tableCup").getSelectedContexts()[0].getObject().to_Cup_ID;
@@ -71,8 +65,8 @@ sap.ui.define(
        * @private
        */
       _onObjectMatched: function (oEvent) {
-        var sObjectId = oEvent.getParameter("arguments").objectId;
-        this._bindView("/Liquid" + sObjectId);
+        var key = oEvent.getParameter("arguments").key;
+        this._bindView("/Liquid" + key);
       },
 
       /**

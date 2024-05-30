@@ -91,7 +91,10 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
-      }
+      },
+      "controlModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			}
     },
     "resources": {
       "css": []
@@ -99,8 +102,8 @@
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
+        "type": "View",
         "viewType": "XML",
-        "viewPath": "ui5freestyle.view",
         "controlId": "app",
         "controlAggregation": "pages",
         "bypassed": {
@@ -108,22 +111,19 @@
             "notFound"
           ]
         },
-        "async": true
+        "async": true,
+        "path": "ui5freestyle.view"
       },
       "routes": [
         {
-          "pattern": "",
+          "pattern": ":?query:",
           "name": "worklist",
-          "target": [
-            "worklist"
-          ]
+          "target": "worklist"
         },
         {
-          "pattern": "Liquid/{objectId}",
+          "pattern": "Liquid{key}:?query:",
           "name": "object",
-          "target": [
-            "object"
-          ]
+          "target": "object"
         }
       ],
       "targets": {

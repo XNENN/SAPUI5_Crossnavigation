@@ -1,0 +1,9 @@
+{
+    "applications": {
+        "fiorielements-display": {
+            "additionalInformation": "SAPUI5.Component=fiorielements",
+            "applicationType": "URL",
+            "url": "../resources/fiorielements"
+        }
+    }
+}

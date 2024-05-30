@@ -75,12 +75,13 @@ annotate service.Cup with @(
         TypeNamePlural : '',
     }
 );
+
 annotate service.LiquidInCup with {
     to_Liquid @Common.SemanticObjectMapping : [
         {
             $Type : 'Common.SemanticObjectMappingType',
             LocalProperty : to_Liquid_ID,
-            SemanticObjectProperty : 'has_Liquid_ID',
+            SemanticObjectProperty : 'ID',
         },
     ]
 };

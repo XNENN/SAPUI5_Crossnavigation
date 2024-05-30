@@ -1,0 +1,9 @@
+{
+    "applications": {
+        "ui5freestyle-display": {
+            "additionalInformation": "SAPUI5.Component=ui5freestyle",
+            "applicationType": "URL",
+            "url": "../resources/ui5freestyle"
+        }
+    }
+}

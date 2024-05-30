@@ -2,3 +2,13 @@ specVersion: "2.5"
 metadata:
   name: ui5freestyle
 type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-servestatic
+      afterMiddleware: compression
+      configuration:
+        paths:
+          - path: /resources/fiorielements
+            src: ../fiorielements/webapp
+          - path: /appconfig
+            src: appconfig
