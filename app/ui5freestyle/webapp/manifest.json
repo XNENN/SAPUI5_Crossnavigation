@@ -22,7 +22,14 @@
           "action": "display",
           "title": "{{flpTitle}}",
           "signature": {
-            "parameters": {},
+            "parameters": {
+              "ID": {
+                "required": true,
+                "defaultValue": {
+                  "value": "12345"
+                }
+              }
+            },
             "additionalParameters": "allowed"
           }
         }
@@ -93,8 +100,8 @@
         }
       },
       "controlModel": {
-				"type": "sap.ui.model.json.JSONModel"
-			}
+        "type": "sap.ui.model.json.JSONModel"
+      }
     },
     "resources": {
       "css": []
@@ -107,9 +114,7 @@
         "controlId": "app",
         "controlAggregation": "pages",
         "bypassed": {
-          "target": [
-            "notFound"
-          ]
+          "target": ["notFound"]
         },
         "async": true,
         "path": "ui5freestyle.view"
@@ -131,13 +136,30 @@
           "viewName": "Worklist",
           "viewId": "worklist",
           "viewLevel": 1,
-          "title": "{i18n>worklistViewTitle}"
+          "title": "{i18n>worklistViewTitle}",
+          "options": {
+            "settings": {
+              "contextPath": "/Liquid",
+              "allowDeepLinking": true,
+              "initialLoad": "Enabled"
+            }
+          }
         },
         "object": {
           "viewName": "Object",
           "viewId": "object",
           "viewLevel": 2,
-          "title": "{i18n>objectViewTitle}"
+          "title": "{i18n>objectViewTitle}",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Liquid",
+              "allowDeepLinking": true
+            }
+          },
+          "type": "Component",
+          "id": "object"
         },
         "objectNotFound": {
           "viewName": "ObjectNotFound",
@@ -155,5 +177,9 @@
       "async": true,
       "id": "app"
     }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
   }
 }

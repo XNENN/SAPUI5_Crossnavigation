@@ -4,8 +4,9 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/routing/History",
     "../model/formatter",
+    "sap/ui/core/UIComponent",
   ],
-  function (BaseController, JSONModel, History, formatter) {
+  function (BaseController, JSONModel, History, formatter, UIComponent) {
     "use strict";
     return BaseController.extend("ui5freestyle.controller.Object", {
       formatter: formatter,
@@ -26,7 +27,8 @@ sap.ui.define(
           busy: true,
           delay: 0,
         });
-        this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
+        var oRouter = UIComponent.getRouterFor(this);
+        oRouter.getRoute("object").attachPatternMatched(this._onObjectMatched, this);
         this.setModel(oViewModel, "objectView");
       },
       /* =========================================================== */
@@ -40,16 +42,15 @@ sap.ui.define(
        * @public
        */
       onNavBack: function () {
-        
         this.getRouter().navTo("worklist", {}, true);
       },
       onNav: function (oEvent) {
-        var to_cup_ID = this.byId("tableCup").getSelectedContexts()[0].getObject().to_Cup_ID;
+        var to_Cup_ID = oEvent.getSource().getProperty("text");
         if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getService) {
           var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
           oCrossAppNav.toExternal({
             target: { semanticObject: "fiorielements", action: "display" },
-            params: { ID: [to_cup_ID] },
+            params: { ID: [to_Cup_ID] },
           });
         }
       },

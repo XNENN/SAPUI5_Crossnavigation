@@ -26,6 +26,12 @@
             "additionalParameters": "allowed"
           }
         }
+      },
+      "outbounds": {
+        "ui5freestyle": {
+          "semanticObject": "ui5freestyle",
+          "action": "manage"
+        }
       }
     },
     "dataSources": {
@@ -33,9 +39,7 @@
         "uri": "/Ui5/",
         "type": "OData",
         "settings": {
-          "annotations": [
-            "annotation"
-          ],
+          "annotations": ["annotation"],
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
         }

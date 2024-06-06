@@ -16,4 +16,11 @@ service CrossNavigation {
         projection on db.LiquidInCup {
             *
         };
+
 }
+annotate CrossNavigation.Cup {
+    @UI.ExcludeFromNavigationContext : true
+    ID;
+    @UI.ExcludeFromNavigationContext : true
+    Name;
+};

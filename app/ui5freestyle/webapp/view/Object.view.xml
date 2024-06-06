@@ -13,13 +13,13 @@
 
         <semantic:titleHeading>
             <Title
-                text="{ID}"
+                text="{Name}"
                 level="H2"/>
         </semantic:titleHeading>
 
         <semantic:headerContent>
             <ObjectNumber
-                unit="{Name}" />
+                unit="{ID}" />
         </semantic:headerContent>
 
         <semantic:sendEmailAction>
@@ -35,7 +35,6 @@
                 descending: false
             }
         }"
-        mode="SingleSelectLeft"
         noDataText="{worklistView>/tableNoDataText}"
         busyIndicatorDelay="{worklistView>/tableBusyDelay}"
         growing="true"
@@ -51,15 +50,15 @@
         </columns>
 
         <items>
-            <ColumnListItem
-            type="Navigation"
-                        press=".onNav">
+            <ColumnListItem>
                 <cells>
                     <ObjectIdentifier
                         title="{ID}"/>
-                    <ObjectNumber
-                        unit="{to_Cup_ID}"
+                    <Link
+                        text="{to_Cup_ID}"
+                        press=".onNav"
                      />
+
                 </cells>
             </ColumnListItem>
         </items>
