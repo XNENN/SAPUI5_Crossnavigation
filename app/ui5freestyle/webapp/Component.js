@@ -27,7 +27,7 @@ sap.ui.define(
         // create the views based on the url/hash
         this.getRouter().initialize();
 
-        let oComponentData = this.getComponentData();
+        const oComponentData = this.getComponentData();
         if (oComponentData.startupParameters && oComponentData.startupParameters.ID) {
           const hashChanger = sap.ui.core.routing.HashChanger.getInstance();
           hashChanger.replaceHash("Liquid(" + oComponentData.startupParameters.ID[0] + ")");

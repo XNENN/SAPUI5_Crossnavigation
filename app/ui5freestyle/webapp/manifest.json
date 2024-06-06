@@ -136,30 +136,13 @@
           "viewName": "Worklist",
           "viewId": "worklist",
           "viewLevel": 1,
-          "title": "{i18n>worklistViewTitle}",
-          "options": {
-            "settings": {
-              "contextPath": "/Liquid",
-              "allowDeepLinking": true,
-              "initialLoad": "Enabled"
-            }
-          }
+          "title": "{i18n>worklistViewTitle}"
         },
         "object": {
           "viewName": "Object",
           "viewId": "object",
           "viewLevel": 2,
-          "title": "{i18n>objectViewTitle}",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/Liquid",
-              "allowDeepLinking": true
-            }
-          },
-          "type": "Component",
-          "id": "object"
+          "title": "{i18n>objectViewTitle}"
         },
         "objectNotFound": {
           "viewName": "ObjectNotFound",
