@@ -1,7 +1,7 @@
 {
   "_version": "1.40.0",
   "sap.app": {
-    "id": "fiorielements",
+    "id": "fiorielementsnavto",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,12 +13,12 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.7.3",
-      "toolsId": "130db1ed-4260-4f46-891d-589300aa04f2"
+      "toolsId": "c842280e-37df-482e-92ac-c43af84ac134"
     },
     "crossNavigation": {
       "inbounds": {
-        "fiorielements-display": {
-          "semanticObject": "fiorielements",
+        "fiorielementsnavto-display": {
+          "semanticObject": "fiorielementsnavto",
           "action": "display",
           "title": "{{flpTitle}}",
           "signature": {
@@ -33,7 +33,9 @@
         "uri": "/Ui5/",
         "type": "OData",
         "settings": {
-          "annotations": ["annotation"],
+          "annotations": [
+            "annotation"
+          ],
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
         }
@@ -66,7 +68,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.124.0",
+      "minUI5Version": "1.125.1",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -82,7 +84,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "fiorielements.i18n.i18n"
+          "bundleName": "fiorielementsnavto.i18n.i18n"
         }
       },
       "": {
@@ -108,28 +110,28 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "CupList",
-          "target": "CupList"
+          "name": "AlcoholList",
+          "target": "AlcoholList"
         },
         {
-          "pattern": "Cup({key}):?query:",
-          "name": "CupObjectPage",
-          "target": "CupObjectPage"
+          "pattern": "Alcohol({key}):?query:",
+          "name": "AlcoholObjectPage",
+          "target": "AlcoholObjectPage"
         }
       ],
       "targets": {
-        "CupList": {
+        "AlcoholList": {
           "type": "Component",
-          "id": "CupList",
+          "id": "AlcoholList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "entitySet": "Cup",
+              "entitySet": "Alcohol",
               "variantManagement": "Page",
               "navigation": {
-                "Cup": {
+                "Alcohol": {
                   "detail": {
-                    "route": "CupObjectPage"
+                    "route": "AlcoholObjectPage"
                   }
                 }
               },
@@ -137,14 +139,14 @@
             }
           }
         },
-        "CupObjectPage": {
+        "AlcoholObjectPage": {
           "type": "Component",
-          "id": "CupObjectPage",
+          "id": "AlcoholObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "entitySet": "Cup"
+              "entitySet": "Alcohol"
             }
           }
         }

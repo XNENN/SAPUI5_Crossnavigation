@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CrossNavigation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Cup" EntityType="CrossNavigation.Cup">
+                    <NavigationPropertyBinding Path="has_Liquid" Target="LiquidInCup"/>
+                    <NavigationPropertyBinding Path="has_Alcohol" Target="AlcoholInCup"/>
+                </EntitySet>
+                <EntitySet Name="Liquid" EntityType="CrossNavigation.Liquid">
+                    <NavigationPropertyBinding Path="in_Cup" Target="LiquidInCup"/>
+                </EntitySet>
+                <EntitySet Name="LiquidInCup" EntityType="CrossNavigation.LiquidInCup">
+                    <NavigationPropertyBinding Path="to_Cup" Target="Cup"/>
+                    <NavigationPropertyBinding Path="to_Liquid" Target="Liquid"/>
+                </EntitySet>
+                <EntitySet Name="Alcohol" EntityType="CrossNavigation.Alcohol">
+                    <NavigationPropertyBinding Path="in_Cup" Target="AlcoholInCup"/>
+                </EntitySet>
+                <EntitySet Name="AlcoholInCup" EntityType="CrossNavigation.AlcoholInCup">
+                    <NavigationPropertyBinding Path="to_Cup" Target="Cup"/>
+                    <NavigationPropertyBinding Path="to_Alcohol" Target="Alcohol"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="Cup">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="has_Liquid" Type="Collection(CrossNavigation.LiquidInCup)" Partner="to_Cup"/>
+                <NavigationProperty Name="has_Alcohol" Type="Collection(CrossNavigation.AlcoholInCup)" Partner="to_Cup"/>
+            </EntityType>
+            <EntityType Name="Liquid">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="in_Cup" Type="Collection(CrossNavigation.LiquidInCup)" Partner="to_Liquid"/>
+            </EntityType>
+            <EntityType Name="LiquidInCup">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="to_Cup" Type="CrossNavigation.Cup" Partner="has_Liquid">
+                    <ReferentialConstraint Property="to_Cup_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="to_Cup_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="to_Liquid" Type="CrossNavigation.Liquid" Partner="in_Cup">
+                    <ReferentialConstraint Property="to_Liquid_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="to_Liquid_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Alcohol">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="in_Cup" Type="Collection(CrossNavigation.AlcoholInCup)" Partner="to_Alcohol"/>
+            </EntityType>
+            <EntityType Name="AlcoholInCup">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="to_Cup" Type="CrossNavigation.Cup" Partner="has_Alcohol">
+                    <ReferentialConstraint Property="to_Cup_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="to_Cup_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="to_Alcohol" Type="CrossNavigation.Alcohol" Partner="in_Cup">
+                    <ReferentialConstraint Property="to_Alcohol_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="to_Alcohol_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <Annotations Target="CrossNavigation.Cup/ID">
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CrossNavigation.Cup/Name">
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CrossNavigation.Liquid/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CrossNavigation.LiquidInCup/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CrossNavigation.Alcohol/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CrossNavigation.AlcoholInCup/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

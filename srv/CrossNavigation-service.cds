@@ -17,6 +17,15 @@ service CrossNavigation {
             *
         };
 
+    entity Alcohol as
+        projection on db.Alcohol {
+            *
+        };
+
+    entity AlcoholInCup as
+        projection on db.AlcoholInCup {
+            *
+        };
 }
 annotate CrossNavigation.Cup {
     @UI.ExcludeFromNavigationContext : true
