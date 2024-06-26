@@ -1,7 +1,7 @@
 {
   "_version": "1.40.0",
   "sap.app": {
-    "id": "ui5freestyle",
+    "id": "ui5freestylenavto",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,12 +13,12 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:worklist",
       "version": "1.7.3",
-      "toolsId": "acdd6a29-e5a1-4d45-8fda-426953b37e30"
+      "toolsId": "f53fee4c-6193-4539-aee4-5f961610ad5c"
     },
     "crossNavigation": {
       "inbounds": {
-        "ui5freestyle-display": {
-          "semanticObject": "ui5freestyle",
+        "ui5freestylenavto-display": {
+          "semanticObject": "ui5freestylenavto",
           "action": "display",
           "title": "{{flpTitle}}",
           "signature": {
@@ -59,7 +59,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.124.0",
+      "minUI5Version": "1.125.1",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -79,7 +79,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "ui5freestyle.i18n.i18n"
+          "bundleName": "ui5freestylenavto.i18n.i18n"
         }
       },
       "": {
@@ -91,9 +91,6 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
-      },
-      "controlModel": {
-        "type": "sap.ui.model.json.JSONModel"
       }
     },
     "resources": {
@@ -102,26 +99,31 @@
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
-        "type": "View",
         "viewType": "XML",
+        "viewPath": "ui5freestylenavto.view",
         "controlId": "app",
         "controlAggregation": "pages",
         "bypassed": {
-          "target": ["notFound"]
+          "target": [
+            "notFound"
+          ]
         },
-        "async": true,
-        "path": "ui5freestyle.view"
+        "async": true
       },
       "routes": [
         {
-          "pattern": ":?query:",
+          "pattern": "",
           "name": "worklist",
-          "target": "worklist"
+          "target": [
+            "worklist"
+          ]
         },
         {
-          "pattern": "Liquid{key}:?query:",
+          "pattern": "Liquid/{objectId}",
           "name": "object",
-          "target": "object"
+          "target": [
+            "object"
+          ]
         }
       ],
       "targets": {
@@ -148,14 +150,10 @@
       }
     },
     "rootView": {
-      "viewName": "ui5freestyle.view.App",
+      "viewName": "ui5freestylenavto.view.App",
       "type": "XML",
       "async": true,
       "id": "app"
     }
-  },
-  "sap.fiori": {
-    "registrationIds": [],
-    "archeType": "transactional"
   }
 }

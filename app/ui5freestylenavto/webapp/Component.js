@@ -3,7 +3,7 @@ sap.ui.define(
   function (UIComponent, Device, models, ErrorHandler) {
     "use strict";
 
-    return UIComponent.extend("ui5freestyle.Component", {
+    return UIComponent.extend("ui5freestylenavto.Component", {
       metadata: {
         manifest: "json",
       },
@@ -27,6 +27,11 @@ sap.ui.define(
         // create the views based on the url/hash
         this.getRouter().initialize();
 
+        const oComponentData = this.getComponentData();
+        if (oComponentData.startupParameters && oComponentData.startupParameters.ID) {
+          const hashChanger = sap.ui.core.routing.HashChanger.getInstance();
+          hashChanger.replaceHash("Liquid/(" + oComponentData.startupParameters.ID[0] + ")");
+        }
       },
 
       /**

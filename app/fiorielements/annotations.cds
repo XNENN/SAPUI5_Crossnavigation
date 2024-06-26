@@ -72,7 +72,7 @@ annotate service.LiquidInCup with @(UI.LineItem #Liquids: [
 ]);
 
 annotate service.LiquidInCup with {
-    to_Liquid @Common.SemanticObject: 'ui5freestyle'
+    to_Liquid @Common.SemanticObject: 'ui5freestylenavto'
 };
 
 annotate service.Cup with @(UI.HeaderInfo: {

@@ -17,13 +17,15 @@
     "start": "cds-serve",
     "watch-fiorielements": "cds watch --open fiorielements/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-ui5freestyle": "cds watch --open ui5freestyle/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-fiorielementsnavto": "cds watch --open fiorielementsnavto/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-fiorielementsnavto": "cds watch --open fiorielementsnavto/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-ui5freestylenavto": "cds watch --open ui5freestylenavto/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
     "app/fiorielements",
     "app/ui5freestyle",
     "app/ui5freestyle",
     "app/fiorielementsnavto",
-    "app/fiorielementsnavto"
+    "app/fiorielementsnavto",
+    "app/ui5freestylenavto"
   ]
 }

@@ -57,12 +57,12 @@ sap.ui.define(
       },
       navToLiquid: function (oEvent) {
         //Navigation Script for Navigation from Ui5 to another Ui5 Application
-        var to_Alcohol_ID = oEvent.getSource().getProperty("target");
+        var to_Liquid_ID = oEvent.getSource().getProperty("target");
         if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getService) {
           var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
           oCrossAppNav.toExternal({
-            target: { semanticObject: "fiorielementsnavto", action: "display" },
-            params: { ID: [to_Alcohol_ID] },
+            target: { semanticObject: "ui5freestylenavto", action: "display" },
+            params: { ID: [to_Liquid_ID] },
           });
         }
       },
