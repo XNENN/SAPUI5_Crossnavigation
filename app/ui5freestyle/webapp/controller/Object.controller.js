@@ -44,13 +44,25 @@ sap.ui.define(
       onNavBack: function () {
         this.getRouter().navTo("worklist", {}, true);
       },
-      onNav: function (oEvent) {
-        var to_Cup_ID = oEvent.getSource().getProperty("text");
+      navToAlcohol: function (oEvent) {
+        //Navigation Script for Navigation from Ui5 to Fiori Elements
+        var to_Alcohol_ID = oEvent.getSource().getProperty("target");
         if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getService) {
           var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
           oCrossAppNav.toExternal({
-            target: { semanticObject: "fiorielements", action: "display" },
-            params: { ID: [to_Cup_ID] },
+            target: { semanticObject: "fiorielementsnavto", action: "display" },
+            params: { ID: [to_Alcohol_ID] },
+          });
+        }
+      },
+      navToLiquid: function (oEvent) {
+        //Navigation Script for Navigation from Ui5 to another Ui5 Application
+        var to_Alcohol_ID = oEvent.getSource().getProperty("target");
+        if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getService) {
+          var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+          oCrossAppNav.toExternal({
+            target: { semanticObject: "fiorielementsnavto", action: "display" },
+            params: { ID: [to_Alcohol_ID] },
           });
         }
       },
@@ -67,7 +79,7 @@ sap.ui.define(
        */
       _onObjectMatched: function (oEvent) {
         var key = oEvent.getParameter("arguments").key;
-        this._bindView("/Liquid" + key);
+        this._bindView("/Cup" + key);
       },
 
       /**

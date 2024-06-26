@@ -125,7 +125,7 @@ sap.ui.define([
          */
         _showObject : function (oItem) {
             this.getRouter().navTo("object", {
-                key: oItem.getBindingContext().getPath().substring("/Liquid".length)
+                key: oItem.getBindingContext().getPath().substring("/Cup".length)
             });
         },
 

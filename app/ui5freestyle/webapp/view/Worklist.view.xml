@@ -20,7 +20,7 @@
                 id="table"
                 width="auto"
                 items="{
-                    path: '/Liquid',
+                    path: '/Cup',
                     sorter: {
                         path: 'ID',
                         descending: false
@@ -57,7 +57,7 @@
                         <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
                     </Column>
                     <Column id="unitNumberColumn" hAlign="End">
-                        <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+                        <Text text="Name" id="unitNumberColumnTitle"/>
                     </Column>
                 </columns>
 
