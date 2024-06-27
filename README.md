@@ -248,3 +248,90 @@ if (oComponentData.startupParameters && oComponentData.startupParameters.ID) {
 }
 //TODO: change the replace hash content with the name of your object
 ```
+
+# Launchpage.html
+
+if you want to test the cross navigation local, you have to add a launch page to your project
+
+this launch page looks like this:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script>
+      window["sap-ushell-config"] = {
+        defaultRenderer: "fiori2",
+        services: {
+          NavTargetResolution: {
+            config: {
+              allowTestUrlComponentConfig: true,
+              enableClientSideTargetResolution: true,
+            },
+          },
+        },
+        applications: {
+          "fiorielements-display": {
+            title: "fiorielements",
+            description: "Cup Manager",
+            additionalInformation: "SAPUI5.Component=fiorielements",
+            applicationType: "URL",
+            url: "./fiorielements/webapp",
+            navigationMode: "embedded",
+          },
+          "ui5freestyle-display": {
+            title: "ui5freestyle",
+            description: "Cup Manager",
+            additionalInformation: "SAPUI5.Component=ui5freestyle",
+            applicationType: "URL",
+            url: "./ui5freestyle/webapp",
+            navigationMode: "embedded",
+          },
+          "fiorielementsnavto-display": {
+            title: "fiorielements nav to",
+            description: "Alcohol Manager",
+            additionalInformation: "SAPUI5.Component=fiorielementsnavto",
+            applicationType: "URL",
+            url: "./fiorielementsnavto/webapp",
+            navigationMode: "embedded",
+          },
+          "ui5freestylenavto-display": {
+            title: "ui5 freestyle nav to",
+            description: "Liquid Manager",
+            additionalInformation: "SAPUI5.Component=ui5freestylenavto",
+            applicationType: "URL",
+            url: "./ui5freestylenavto/webapp",
+            navigationMode: "embedded",
+          },
+        },
+      };
+    </script>
+    <script src="https://ui5.sap.com/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
+    <script
+      src="https://ui5.sap.com/resources/sap-ui-core.js"
+      data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
+      data-sap-ui-compatVersion="edge"
+      data-sap-ui-theme="sap_horizon"
+      data-sap-ui-frameOptions="allow"
+      data-sap-ui-bindingSyntax="complex"
+    ></script>
+    <script>
+      sap.ui.getCore().attachInit(function () {
+        sap.ushell.Container.createRenderer().placeAt("content");
+      });
+    </script>
+  </head>
+  <body class="sapUiBody" id="content"></body>
+</html>
+```
+
+you can copy the launch page and change the display name, the SAPUI5.Component and the url to match your applications.
+
+# if something does not work:
+
+please contact me niklas.ennser@agilita.ch or just ask me in person. 
+
