@@ -27,6 +27,7 @@ sap.ui.define(
         // create the views based on the url/hash
         this.getRouter().initialize();
 
+        //get the startup parameters to replace the hash and navigate to the correct page
         const oComponentData = this.getComponentData();
         if (oComponentData.startupParameters && oComponentData.startupParameters.ID) {
           const hashChanger = sap.ui.core.routing.HashChanger.getInstance();

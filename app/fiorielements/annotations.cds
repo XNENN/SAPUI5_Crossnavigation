@@ -75,6 +75,14 @@ annotate service.LiquidInCup with {
     to_Liquid @Common.SemanticObject: 'ui5freestylenavto'
 };
 
+annotate service.LiquidInCup with {
+    to_Liquid @Common.SemanticObjectMapping: [{
+        $Type                 : 'Common.SemanticObjectMappingType',
+        LocalProperty         : to_Liquid_ID,
+        SemanticObjectProperty: 'ID',
+    }, ]
+};
+
 annotate service.Cup with @(UI.HeaderInfo: {
     Title         : {
         $Type: 'UI.DataField',
@@ -83,14 +91,6 @@ annotate service.Cup with @(UI.HeaderInfo: {
     TypeName      : '',
     TypeNamePlural: '',
 });
-
-annotate service.LiquidInCup with {
-    to_Liquid @Common.SemanticObjectMapping: [{
-        $Type                 : 'Common.SemanticObjectMappingType',
-        LocalProperty         : to_Liquid_ID,
-        SemanticObjectProperty: 'ID',
-    }, ]
-};
 
 annotate service.Liquid with @(Communication.Contact #contact: {
     $Type: 'Communication.ContactType',
@@ -115,6 +115,9 @@ annotate service.AlcoholInCup with {
             ![@UI.TextArrangement] : #TextOnly,
         }
 };
+
+
+// annotation to target the semantic object of the referenced application
 annotate service.AlcoholInCup with {
     to_Alcohol @Common.SemanticObject : 'fiorielementsnavto'
 };
@@ -127,3 +130,4 @@ annotate service.AlcoholInCup with {
         },
     ]
 };
+
