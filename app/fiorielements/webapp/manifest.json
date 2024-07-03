@@ -30,7 +30,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/Ui5/",
+        "uri": "Ui5/",
         "type": "OData",
         "settings": {
           "annotations": ["annotation"],
@@ -154,5 +154,9 @@
   "sap.fiori": {
     "registrationIds": [],
     "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "SAPUI5_Crossnavigation.service"
   }
 }

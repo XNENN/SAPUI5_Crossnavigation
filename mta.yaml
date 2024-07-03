@@ -3,21 +3,20 @@ ID: SAPUI5_Crossnavigation
 version: 1.0.0
 description: "A simple CAP project."
 parameters:
+  deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm ci
         - npx cds build --production
 modules:
+# --------------------- SERVER MODULE ------------------------------
   - name: SAPUI5_Crossnavigation-srv
     type: nodejs
     path: gen/srv
     parameters:
       buildpack: nodejs_buildpack
-      readiness-health-check-type: http
-      readiness-health-check-http-endpoint: /health
     build-parameters:
       builder: npm
     provides:
@@ -27,7 +26,8 @@ modules:
     requires:
       - name: SAPUI5_Crossnavigation-db
       - name: SAPUI5_Crossnavigation-auth
-
+      - name: SAPUI5_Crossnavigation-destination-service
+ # -------------------- SIDECAR MODULE ------------------------------
   - name: SAPUI5_Crossnavigation-db-deployer
     type: hdb
     path: gen/db
@@ -35,13 +35,127 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: SAPUI5_Crossnavigation-db
+  # ------------------ APPLICATION CONTENT ---------------------------
+  - name: SAPUI5_Crossnavigation-app-content
+    #-------------------------------------------------------------------
+    type: com.sap.application.content
+    path: app
+    requires:
+      - name: SAPUI5_Crossnavigation-destination-service
+      - name: SAPUI5_Crossnavigation-html5-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: SAPUI5_Crossnavigation-app-fiorielements
+          artifacts:
+            - fiorielements.zip
+          target-path: resources/
+        - name: SAPUI5_Crossnavigation-app-fiorielementsnavto
+          artifacts:
+            - fiorielementsnavto.zip
+          target-path: resources/
+        - name: SAPUI5_Crossnavigation-app-ui5freestyle
+          artifacts:
+            - ui5freestyle.zip
+          target-path: resources/
+        - name: SAPUI5_Crossnavigation-app-ui5freestylenavto
+          artifacts:
+            - ui5freestylenavto.zip
+          target-path: resources/
+   #------------- APPLICATION: Characteristics Manager ----------------
+  - name: SAPUI5_Crossnavigation-app-fiorielements
+    #-------------------------------------------------------------------
+    type: html5
+    path: app/fiorielements
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build:cf
+      supported-platforms: []
+   #------------- APPLICATION: Characteristics Manager ----------------
+  - name: SAPUI5_Crossnavigation-app-fiorielementsnavto
+    #-------------------------------------------------------------------
+    type: html5
+    path: app/fiorielementsnavto
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build:cf
+      supported-platforms: []
+   #------------- APPLICATION: Characteristics Manager ----------------
+  - name: SAPUI5_Crossnavigation-app-ui5freestyle
+    #-------------------------------------------------------------------
+    type: html5
+    path: app/ui5freestyle
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build:cf
+      supported-platforms: []
+   #------------- APPLICATION: Characteristics Manager ----------------
+  - name: SAPUI5_Crossnavigation-app-ui5freestylenavto
+    #-------------------------------------------------------------------
+    type: html5
+    path: app/ui5freestylenavto
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build:cf
+      supported-platforms: []
+
+
+  # ------------------ DESTINATION CONTENT ----------------------------
+  - name: SAPUI5_Crossnavigation-destinations
+    #-------------------------------------------------------------------
+    type: com.sap.application.content
+    requires:
+      - name: SAPUI5_Crossnavigation-auth
+        parameters:
+          service-key:
+            name: SAPUI5_Crossnavigation-auth-key
+      - name: SAPUI5_Crossnavigation-html5-repo-host
+        parameters:
+          service-key:
+            name: SAPUI5_Crossnavigation-html5-repo-host--key
+      - name: SAPUI5_Crossnavigation-destination-service
+        parameters:
+          content-target: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: SAPUI5_Crossnavigation-auth
+              Authentication: OAuth2UserTokenExchange
+              TokenServiceInstanceName: SAPUI5_Crossnavigation-auth
+              TokenServiceKeyName: SAPUI5_Crossnavigation-auth-key
+              sap.cloud.service: SAPUI5_Crossnavigation.service
+            - Name: SAPUI5_Crossnavigation-html5-repository
+              ServiceInstanceName: SAPUI5_Crossnavigation-html5-repo-host
+              ServiceKeyName: SAPUI5_Crossnavigation-html5-repo-host-key
+              sap.cloud.service: SAPUI5_Crossnavigation.service
+    build-parameters:
+      no-source: true
+
 
 resources:
+#-----------------------------------------------------------------
   - name: SAPUI5_Crossnavigation-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
+#-----------------------------------------------------------------
   - name: SAPUI5_Crossnavigation-auth
     type: org.cloudfoundry.managed-service
     parameters:
@@ -49,5 +163,40 @@ resources:
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: SAPUI5_Crossnavigation-${org}-${space}
         tenant-mode: dedicated
+        xsappname: SAPUI5_Crossnavigation-${org}-${space}
+
+  #-----------------------------------------------------------------
+  - name: SAPUI5_Crossnavigation-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+#-----------------------------------------------------------------
+  - name: SAPUI5_Crossnavigation-destination-service
+    #-----------------------------------------------------------------
+    type: org.cloudfoundry.managed-service
+    requires:
+      - name: srv-api
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        version: 1.0.0
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            existing_destinations_policy: ignore
+            destinations:
+              - Name: SAPUI5_Crossnavigation-srv
+                Authentication: NoAuthentication
+                HTML5.DynamicDestination: true
+                HTML5.ForwardAuthToken: true
+                ProxyType: Internet
+                Type: HTTP
+                URL: ~{srv-api/srv-url}
+              - Name: ui5
+                Authentication: NoAuthentication
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com

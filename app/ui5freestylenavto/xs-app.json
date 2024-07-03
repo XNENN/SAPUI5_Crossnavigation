@@ -1,0 +1,19 @@
+{
+    "welcomeFile": "/index.html",
+    "authenticationMethod": "route",
+    "routes": [
+      {
+        "source": "^Ui5/(.*)$",
+        "target": "Ui5/$1",
+        "destination": "SAPUI5_Crossnavigation-srv",
+        "authenticationType": "xsuaa",
+        "csrfProtection": false
+      },
+      {
+        "source": "^(.*)$",
+        "target": "$1",
+        "service": "html5-apps-repo-rt",
+        "authenticationType": "xsuaa"
+      }
+    ]
+  }
