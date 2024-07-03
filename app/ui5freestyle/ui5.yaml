@@ -5,13 +5,3 @@ type: application
 framework:
   name: SAPUI5
   version: "1.120.12"
-server:
-  customMiddleware:
-    - name: fiori-tools-servestatic
-      afterMiddleware: compression
-      configuration:
-        paths:
-          - path: /resources/fiorielements
-            src: ../fiorielements/webapp
-          - path: /appconfig
-            src: appconfig

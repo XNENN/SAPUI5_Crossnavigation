@@ -3,9 +3,9 @@
     "authenticationMethod": "route",
     "routes": [
       {
-        "source": "^Ui5/(.*)$",
-        "target": "Ui5/$1",
-        "destination": "SAPUI5_Crossnavigation-srv",
+        "source": "^/Ui5/(.*)$",
+        "target": "/Ui5/$1",
+        "destination": "SAPUI5_Crossnavigation-srv-destination",
         "authenticationType": "xsuaa",
         "csrfProtection": false
       },

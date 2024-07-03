@@ -30,7 +30,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "Ui5/",
+        "uri": "/Ui5/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -155,6 +155,10 @@
       "async": true,
       "id": "app"
     }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
   },
   "sap.cloud": {
     "public": true,

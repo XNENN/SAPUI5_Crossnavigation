@@ -188,7 +188,7 @@ resources:
           instance:
             existing_destinations_policy: ignore
             destinations:
-              - Name: SAPUI5_Crossnavigation-srv
+              - Name: SAPUI5_Crossnavigation-srv-destination
                 Authentication: NoAuthentication
                 HTML5.DynamicDestination: true
                 HTML5.ForwardAuthToken: true
